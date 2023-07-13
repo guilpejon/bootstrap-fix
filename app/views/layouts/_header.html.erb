@@ -1,0 +1,29 @@
+<header style="padding: 10px">
+  <nav style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="width: 30%;">
+      <h1>
+        <%= link_to 'Odin Facebook', root_path, class: "btn" %>
+      </h1>
+    </div>
+    <div style="width: 70%;">
+      <ul style="list-style-type: none; display: flex; align-items: center; float: right;">
+        <li style="margin-right: 20px;">
+          <%= link_to 'Dashboard', root_path, class: "btn" %>
+        </li>
+        <li style="margin-right: 20px;">
+          <%= link_to 'Friend suggestions', users_path, class: "btn" %>
+        </li>
+        <li style="margin-right: 20px;">
+          <%= link_to 'Friend requests', friend_requests_path, class: "btn" %>
+        </li>
+        <li>
+          <%= link_to 'Sign out', destroy_user_session_path, class: "btn", data: {
+                              turbo_method: :delete,
+                              turbo_confirm: "Are you sure?"
+                            } %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+

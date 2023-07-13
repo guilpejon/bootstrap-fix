@@ -1,0 +1,11 @@
+<%= render 'layouts/header', title: 'Dashboard' %>
+
+<main style="padding: 10px">
+  <h2>Friends</h2>
+
+  <% @friends.each do |friend| %>
+    <li style="display: flex; align-items: center;">
+      <label style="margin-right: 10px"><%= "#{friend.first_name} #{friend.last_name}" %></label>
+    </li>
+  <% end %>
+</main

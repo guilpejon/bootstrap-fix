@@ -1,0 +1,17 @@
+<%= render "layouts/header", title: 'Users' %>
+
+<main style="padding: 10px">
+  <h2>Friend suggestions</h2>
+  
+  <ul>
+    <% @users.each do |user| %>
+      <li style="display: flex; align-items: center; margin-bottom: 10px;">
+        <label style="margin-right: 10px"><%= "#{user.first_name} #{user.last_name}" %></label>
+        <%= button_to 'Send friend request', friend_requests_path(friend_id: user.id), method: :post %>
+        <% if flash["request-#{user.id}"] %>
+          <div style="margin-left: 10px;"><%= flash["request-#{user.id}"] %></div>
+        <% end %>
+      </li>
+    <% end %>
+  <ul>
+</main>

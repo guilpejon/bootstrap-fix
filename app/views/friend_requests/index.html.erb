@@ -1,0 +1,15 @@
+<%= render 'layouts/header', title: 'Friend requests' %>
+
+<main style="padding: 10px">
+  <h2>Friend requests</h2>
+
+  <% @friend_requests.each do |request| %>
+    <li style="display: flex; align-items: center; margin-bottom: 10px">
+      <label style="margin-right: 10px"><%= "#{request.user.first_name} #{request.user.last_name}" %></label>
+      <%= button_to 'Accept request', friend_request_path(id: request.id), method: :put %>
+      <% if flash[:message] %>
+        <div style="margin-left: 10px;"><%= flash["request-#{request.id}"] %></div>
+      <% end %>
+    </li>
+  <% end %>
+</main
