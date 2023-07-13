@@ -8,7 +8,6 @@ class FriendRequestsController < ApplicationController
   end
 
   def create
-    flash
     flash["request-#{friend_id}"] = if @friend_request.save
                                       'Friend request sent'
                                     else
@@ -20,7 +19,7 @@ class FriendRequestsController < ApplicationController
 
   def update
     friend_request = FriendRequest.find(params[:id])
-    friend_request.update!(accepted: true)
+    friend_request.update(accepted: true)
     redirect_to friend_requests_path
   end
 

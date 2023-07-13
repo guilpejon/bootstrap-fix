@@ -1,0 +1,49 @@
+<%= render 'layouts/header', title: 'Dashboard' %>
+
+<main style="padding: 10px">
+  <div>
+    <h2>Posts</h2>
+
+    <%= link_to 'Create Post', new_post_path, class: "btn" %>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <% @posts.each do |post| %>
+      <div>
+        <label><%= "#{post.user.first_name} #{post.user.last_name}" %></label>
+      </div>
+      <div>
+        <p><%= post.description %></p>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <%= button_to 'like', post_likes_path(post_id: post.id) %>
+        <label style="margin-left: 10px;">likes: <%= post.likes.count %></label>
+      </div>
+      <div>
+        <h4>Comments:</h4>
+        <% if post.comments.any? %>
+          <ul>
+            <% post.comments.each do |comment| %>
+              <li><%= comment.content %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <label>No comments yet for this post</label>
+        <% end %>
+
+        <h4>Add comment: </h4>
+        <%= form_with model: [post, post.comments.build] do |form| %>
+        <div>
+          <%= form.label :content %> <br>
+          <%= form.text_area :content %>
+        </div>
+
+        <div>
+          <%= form.submit %>
+        </div> 
+        <% end %>
+      </div>
+      -----------------------------------------------
+    <% end %>
+  </div>
+</main>
