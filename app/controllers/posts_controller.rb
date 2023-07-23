@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   def index
-    @posts = current_user.friends.map(&:posts).flatten
+    @posts = current_user.friends.map(&:posts).flatten.concat(current_user.posts).sort_by(&:created_at)
   end
 
   def new

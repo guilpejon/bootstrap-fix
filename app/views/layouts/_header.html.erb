@@ -1,25 +1,26 @@
 <header style="padding: 10px">
-  <nav style="display: flex; align-items: center; justify-content: space-between;">
-    <div style="width: 30%;">
-      <h1>
-        <%= link_to 'Odin Facebook', root_path, class: "btn" %>
-      </h1>
-    </div>
-    <div style="width: 70%;">
-      <ul style="list-style-type: none; display: flex; align-items: center; float: right;">
-        <li style="margin-right: 20px;">
-          <%= link_to 'Friend suggestions', users_path, class: "btn" %>
-        </li>
-        <li style="margin-right: 20px;">
-          <%= link_to 'Friend requests', friend_requests_path, class: "btn" %>
-        </li>
-        <li>
-          <%= link_to 'Sign out', destroy_user_session_path, class: "btn", data: {
-                              turbo_method: :delete,
-                              turbo_confirm: "Are you sure?"
-                            } %>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <%= link_to 'Odin Facebook', root_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto me-0">
+          <li class="nav-item">
+            <%= link_to 'Friend suggestions', users_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Friend requests', friend_requests_path, class: "nav-link" %>
+          </li>
+          <li>
+            <%= link_to 'Sign out', destroy_user_session_path, class: "nav-link", data: {
+                                turbo_method: :delete,
+                                turbo_confirm: "Are you sure?"
+                              } %>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </header>
