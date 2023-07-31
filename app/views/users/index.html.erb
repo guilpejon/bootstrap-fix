@@ -1,17 +1,28 @@
-<%= render "layouts/header", title: 'Users' %>
+<%= render 'layouts/header', title: 'Friend requests' %>
 
-<main style="padding: 10px">
-  <h2>Friend suggestions</h2>
-  
-  <ul style="padding: 0">
-    <% @users.each do |user| %>
-      <li style="display: flex; align-items: center; margin-bottom: 10px;">
-        <label style="margin-right: 10px"><%= "#{user.first_name} #{user.last_name}" %></label>
-        <%= button_to 'Send friend request', friend_requests_path(friend_id: user.id), method: :post %>
-        <% if flash["request-#{user.id}"] %>
-          <div style="margin-left: 10px;"><%= flash["request-#{user.id}"] %></div>
+<main class="container">
+  <div class="row mb-3">
+    <h2>Friend Suggestions</h2>
+  </div>
+
+  <div class="row">
+    <ul class="list-group list-group-flush">
+      <% @users.each do |user| %>
+        <% if flash["request-#{user.id}"].present? %>
+          <div class="alert alert-success" role="alert">
+            <%= flash["request-#{user.id}"] %>
+          </div>
+        <% elsif flash['already-sent-alert'].present? %>
+          <div class="alert alert-danger" role="alert">
+            <%= flash['already-sent-alert'] %>
+          </div>
         <% end %>
-      </li>
-    <% end %>
-  <ul>
+
+        <li class="list-group-item d-flex align-items-center justify-content-between">
+          <label style="margin-right: 10px"><%= user.full_name.titlecase %></label>
+          <%= button_to 'Send friend request', friend_requests_path(friend_id: user.id), class: "btn", method: :post %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </main>

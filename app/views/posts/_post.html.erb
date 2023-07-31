@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= post.user.full_name.titlecase %></h5>
+    <p class="card-text">
+      <%= post.description %>
+    </p>
+  </div>
+  <div class="card-footer">
+    <div class="row justify-content-between m-2">
+      <div class="col-lg-1">
+        <label class="card-link">likes: <%= post.likes.count %></label>
+      </div>
+      <div class="col-lg-2">
+        <label class="card-link">comments: <%= post.comments.count %></label>
+      </div>
+    </div>
+    <hr />
+    <div class="row m-2">
+      <div class="col-12">
+        <div class="row align-items-center">
+          <div class="col-lg-1">
+            <%= button_to 'like', post_likes_path(post_id: post.id, action_view: action_view), class: "btn btn-primary" %>
+          </div>
+          <div class="col-lg-2">
+            <label class="card-link">
+              <% if !full_view %>
+                <%= link_to 'Comments', post_path(post) %>
+              <% end %>
+            </label>
+          </div>
+        </div> 
+      </div>
+    </div>
+    <hr />
+
+    <%= render 'comments/comments', post: post, full_view: full_view, action_view: action_view %>
+  </div>
+</div>

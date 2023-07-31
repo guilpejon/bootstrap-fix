@@ -29,7 +29,7 @@ class FriendRequestsController < ApplicationController
     @friend_request = FriendRequest.find_or_initialize_by(friend_id:, user_id: current_user.id)
     return unless @friend_request.id.present?
 
-    flash["request-#{friend_id}"] = 'You already sent a friend request to this user'
+    flash['already-sent-alert'] = 'You already sent a friend request to this user'
     redirect_to users_path
   end
 

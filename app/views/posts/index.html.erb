@@ -1,4 +1,4 @@
-<%= render 'layouts/header', title: 'Dashboard' %>
+<%= render 'layouts/header' %>
 
 <main class="container p-2">
   <div class="row">
@@ -10,53 +10,15 @@
     </div>
   </div>
 
-  <div class="mt-5">
-    <% @posts.each do |post| %>
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title"><%= "#{post.user.first_name} #{post.user.last_name}" %></h5>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              <%= post.description %>
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="row" style="align-items: center;">
-              <div class="col-1">
-                <%= button_to 'like', post_likes_path(post_id: post.id), class: "btn btn-primary" %>
-              </div>
-              <div class="col-1">
-                <label class="card-link">likes: <%= post.likes.count %></label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h4>Comments:</h4>
-          <% if post.comments.any? %>
-            <ul>
-              <% post.comments.each do |comment| %>
-                <li><%= comment.content %></li>
-              <% end %>
-            </ul>
-          <% else %>
-            <label>No comments yet for this post</label>
-          <% end %>
-
-          <h4>Add comment: </h4>
-          <%= form_with model: [post, post.comments.build] do |form| %>
-          <div>
-            <%= form.label :content %> <br>
-            <%= form.text_area :content %>
-          </div>
-
-          <div>
-            <%= form.submit %>
-          </div> 
-          <% end %>
-        </div>
-      -----------------------------------------------
-    <% end %>
+  <div class="mt-5 row">
+    <div class="col-10 offset-1">
+      <% if @posts.count.zero? %>
+        <label>No posts to show</label>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'post', post: post, full_view: false, action_view: 'index' %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </main>

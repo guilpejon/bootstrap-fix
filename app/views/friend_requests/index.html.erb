@@ -1,17 +1,21 @@
 <%= render 'layouts/header', title: 'Friend requests' %>
 
-<main style="padding: 10px">
-  <h2>Friend requests</h2>
+<main class="container">
+  <div class="row mb-3">
+    <h2>Friend requests</h2>
+  </div>
 
-  <ul style="padding: 0">
-    <% @friend_requests.each do |request| %>
-      <li style="display: flex; align-items: center; margin-bottom: 10px">
-        <label style="margin-right: 10px"><%= "#{request.user.first_name} #{request.user.last_name}" %></label>
-        <%= button_to 'Accept request', friend_request_path(id: request.id), method: :put %>
-        <% if flash[:message] %>
-          <div style="margin-left: 10px;"><%= flash["request-#{request.id}"] %></div>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-</main
+  <div class="row">
+    <ul class="list-group list-group-flush">
+      <% @friend_requests.each do |request| %>
+        <li class="list-group-item d-flex align-items-center justify-content-between">
+          <label ><%= request.user.full_name.titlecase %></label>
+          <%= button_to 'Accept request', friend_request_path(id: request.id), class: "btn", method: :put %>
+          <% if flash[:message] %>
+            <div style="margin-left: 10px;"><%= flash["request-#{request.id}"] %></div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</main>
